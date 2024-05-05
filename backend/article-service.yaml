@@ -1,0 +1,107 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: article-service-secrets
+type: Opaque
+data:
+  username: cm9vdA==  # root
+  password: a292ZW5nZXJzMTIzNA==  # kovengers1234
+  rabbitmq-username: YWRtaW4=  # admin
+  rabbitmq-password: YWRtaW4=  # admin
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: article-service-config
+data:
+  application.yml: |
+    spring:
+      main:
+        allow-bean-definition-overriding: true
+      datasource:
+        
+        url: jdbc:mysql://172.16.211.101:3306/newcord_article_db
+        # username: Secrets 에서 가져옴
+        # password: Secrets 에서 가져옴
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      jpa:
+        hibernate:
+          ddl-auto: update 
+        show-sql: true 
+        generate-ddl: true 
+        properties:
+          hibernate:
+            format_sql: true 
+            default_batch_fetch_size: 100 
+            dialect: org.hibernate.dialect.MySQL8Dialect
+
+      
+      data:
+        mongodb:
+          uri: mongodb://admin:kovengers1234@172.16.211.101:27017/newcord_article_db?authSource=admin
+          database: newcord_article_db
+
+      rabbitmq:
+        host: 172.16.211.108
+        stomp-port: 61613
+        amqp-port: 5672
+        username: admin
+        password: admin
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: article-service
+  labels:
+    app: article-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: article-service
+  template:
+    metadata:
+      labels:
+        app: article-service
+    spec:
+      containers:
+      - name: article-service
+        image: kovengers/article-service:latest
+        ports:
+        - containerPort: 8080
+        env:
+          - name: SPRING_DATASOURCE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: article-service-secrets
+                key: username
+          - name: SPRING_DATASOURCE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: article-service-secrets
+                key: password
+          - name: SPRING_CONFIG_LOCATION
+            value: /config/application.yml
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        configMap:
+          name: article-service-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: article-service-service
+spec:
+  selector:
+    app: article-service
+  ports:
+    - protocol: TCP
+      port: 80            
+      targetPort: 8080    
+  type: LoadBalancer
