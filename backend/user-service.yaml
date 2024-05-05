@@ -19,33 +19,29 @@ data:
         allow-bean-definition-overriding: true
       datasource:
         
-        url: jdbc:mysql://172.16.211.101:3306/newcord_user_db
+        url: jdbc:mysql://172.16.211.102:3306/newcord_user_db
         # username: Secrets 에서 가져옴
         # password: Secrets 에서 가져옴
         driver-class-name: com.mysql.cj.jdbc.Driver
       jpa:
         hibernate:
-          ddl-auto: update 
+          ddl-auto: create 
         show-sql: true 
         generate-ddl: true 
         properties:
           hibernate:
             format_sql: true 
-            default_batch_fetch_size: 100 
-            dialect: org.hibernate.dialect.MySQL8Dialect
+      thymeleaf:
+        prefix: classpath:/static/
+    kakao:
+      api_key: a61af306bdb89fc8bbbaced44fb4fef0
+      redirect_uri: http://localhost:8080/api/auth/login
+    jwt:
+      secret: 01254cd9f9f67bab5529f1d210a20d93eab0aa9d09d681e3b201b36a4069fd6b
+      accessTokenValiditySeconds: 1800
+      refreshTokenValiditySeconds: 604800
 
-      
-      data:
-        mongodb:
-          uri: mongodb://admin:kovengers1234@172.16.211.101:27017/newcord_user_db?authSource=admin
-          database: newcord_user_db
-
-      rabbitmq:
-        host: 172.16.211.108
-        stomp-port: 61613
-        amqp-port: 5672
-        username: admin
-        password: admin
+  
 
 ---
 apiVersion: apps/v1
