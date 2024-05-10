@@ -48,7 +48,11 @@ data:
         amqp-port: 5672
         username: admin
         password: admin
-
+    springdoc:
+      api-docs:
+        path: "/v3/api-docs"
+      swagger-ui:
+        configUrl: "/articles/v3/api-docs/swagger-config"
 ---
 apiVersion: apps/v1
 kind: Deployment
