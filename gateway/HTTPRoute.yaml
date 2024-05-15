@@ -5,6 +5,7 @@ metadata:
   namespace: default
   annotations:
     konghq.com/strip-path: 'true'
+    konghq.com/plugins: jwt-auth
 
 spec:
   parentRefs:
@@ -21,14 +22,14 @@ spec:
           kind: Service
           port: 80
           weight: 1
-    - matches:
-        - path:
-            type: PathPrefix
-            value: "/users"
-      backendRefs:
-        - name: user-service-service
-          port: 80
-          weight: 1
+    # - matches:
+    #     - path:
+    #         type: PathPrefix
+    #         value: "/users"
+    #   backendRefs:
+    #     - name: user-service-service
+    #       port: 80
+    #       weight: 1
     - matches:
         - path:
             type: PathPrefix

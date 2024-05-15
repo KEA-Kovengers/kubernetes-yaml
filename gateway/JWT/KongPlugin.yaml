@@ -1,0 +1,8 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: jwt
+  namespace: default
+config:
+  run_on_preflight: true
+plugin: jwt
