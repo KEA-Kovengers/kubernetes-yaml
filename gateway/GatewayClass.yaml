@@ -11,50 +11,7 @@ spec:
           containers:
           - name: proxy
             image: kong:3.6.1
-            env:
-            - name: KONG_DATABASE
-              value: "postgres"
-            - name: KONG_PG_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: kong-postgres-credentials
-                  key: kong_pg_host
-            - name: KONG_PG_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: kong-postgres-credentials
-                  key: kong_pg_port
-            - name: KONG_PG_USER
-              valueFrom:
-                secretKeyRef:
-                  name: kong-postgres-credentials
-                  key: kong_pg_user
-            - name: KONG_PG_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: kong-postgres-credentials
-                  key: kong_pg_password
-            - name: KONG_PG_DATABASE
-              valueFrom:
-                secretKeyRef:
-                  name: kong-postgres-credentials
-                  key: kong_pg_database
-            - name: KONG_ADMIN_LISTEN
-              value: "0.0.0.0:8001, 0.0.0.0:8444 ssl"
-            - name: KONG_ADMIN_GUI_URL
-              value: "http://localhost:8002"
-            - name: KONG_ADMIN_GUI_PATH
-              value: "/manager"
-            ports:
-            - name: admin
-              containerPort: 8001
-            - name: admin-ssl
-              containerPort: 8444
-            - name: gui
-              containerPort: 8002
-            readinessProbe:
-              initialDelaySeconds: 1
-              periodSeconds: 1
+
   controlPlaneOptions:
     deployment:
       podTemplateSpec:
@@ -65,3 +22,29 @@ spec:
             env:
             - name: CONTROLLER_LOG_LEVEL
               value: debug
+
+---
+kind: GatewayClass
+apiVersion: gateway.networking.k8s.io/v1beta1
+metadata:
+  name: kong
+spec:
+  controllerName: konghq.com/gateway-operator
+  parametersRef:
+    group: gateway-operator.konghq.com
+    kind: GatewayConfiguration
+    name: kong
+    namespace: default
+
+---
+kind: Gateway
+apiVersion: gateway.networking.k8s.io/v1beta1
+metadata:
+  name: kong
+  namespace: default
+spec:
+  gatewayClassName: kong
+  listeners:
+  - name: http
+    protocol: HTTP
+    port: 80

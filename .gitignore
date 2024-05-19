@@ -25,3 +25,7 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+gateway/kong-admin.yaml
+gateway/JWT/secrets.yaml
+gateway/JWT/credential.yaml
+gateway/JWT/consumer.yaml
