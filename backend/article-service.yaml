@@ -48,11 +48,24 @@ data:
         amqp-port: 5672
         username: admin
         password: admin
+    
+    cloud:
+      kakao:
+        object-storage:
+          endpoint: https://objectstorage.kr-central-2.kakaoi.io
+          region: kr-central-2
+          bucket: user-service
+          access-key: 9136c2a42a2f43889b8e0b1c54e2d082
+          secret-key: 2a41342d7fee4f3696913079846d8729
+          project-id : 3e614ed3c42f48858e6668a30d7b3c1a
+
     springdoc:
       api-docs:
         path: "/v3/api-docs"
       swagger-ui:
         configUrl: "/articles/v3/api-docs/swagger-config"
+
+
 ---
 apiVersion: apps/v1
 kind: Deployment
