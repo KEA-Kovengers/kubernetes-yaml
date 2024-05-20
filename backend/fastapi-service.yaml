@@ -19,6 +19,8 @@ spec:
         image: kovengers/fast-api:latest
         ports:
         - containerPort: 8000
+        imagePullPolicy: Always
+
         envFrom:
         - configMapRef:
             name: fastapi-service-config

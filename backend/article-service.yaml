@@ -59,12 +59,6 @@ data:
           secret-key: 2a41342d7fee4f3696913079846d8729
           project-id : 3e614ed3c42f48858e6668a30d7b3c1a
 
-    springdoc:
-      api-docs:
-        path: "/v3/api-docs"
-      swagger-ui:
-        configUrl: "/articles/v3/api-docs/swagger-config"
-
 
 ---
 apiVersion: apps/v1
@@ -88,6 +82,7 @@ spec:
         image: kovengers/article-service:latest
         ports:
         - containerPort: 8080
+        imagePullPolicy: Always
         env:
           - name: SPRING_DATASOURCE_USERNAME
             valueFrom:
