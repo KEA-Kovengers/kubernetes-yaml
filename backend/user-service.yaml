@@ -15,22 +15,37 @@ metadata:
 data:
   application.yml: |
     spring:
-      main:
-        allow-bean-definition-overriding: true
+      application:
+        name: user-service
+      autoconfigure:
+        exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
       datasource:
-        
         url: jdbc:mysql://172.16.211.102:3306/newcord_user_db
-        # username: Secrets 에서 가져옴
-        # password: Secrets 에서 가져옴
+        username: root
+        password: kovengers1234
         driver-class-name: com.mysql.cj.jdbc.Driver
+        master:
+          jdbcUrl: jdbc:mysql://172.16.211.102:3306/newcord_user_db
+          username: root
+          password: kovengers1234
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        slave:
+          jdbcUrl: jdbc:mysql://172.16.211.107:3307/newcord_user_db
+          username: root
+          password: kovengers1234
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        #    url: jdbc:mysql://localhost:3306/newcord_userservice_db
+        #    username: kovengers
+        #    password: kovengers1234
+        #driver-class-name: com.mysql.cj.jdbc.Driver
       jpa:
         hibernate:
-          ddl-auto: create 
-        show-sql: true 
-        generate-ddl: true 
+          ddl-auto: update
+        show-sql: true
+        generate-ddl: true
         properties:
           hibernate:
-            format_sql: true 
+            format_sql: true
       thymeleaf:
         prefix: classpath:/static/
     kakao:
@@ -50,7 +65,6 @@ data:
           access-key: 9136c2a42a2f43889b8e0b1c54e2d082
           secret-key: 2a41342d7fee4f3696913079846d8729
           project-id : 3e614ed3c42f48858e6668a30d7b3c1a
-
   
 
 ---

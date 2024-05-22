@@ -20,23 +20,23 @@ data:
       main:
         allow-bean-definition-overriding: true
       datasource:
-        
+        # JPA 데이터 소스 설정
         url: jdbc:mysql://172.16.211.101:3306/newcord_article_db
-        # username: Secrets 에서 가져옴
-        # password: Secrets 에서 가져옴
+        username: root
+        password: kovengers1234
         driver-class-name: com.mysql.cj.jdbc.Driver
       jpa:
         hibernate:
-          ddl-auto: update 
-        show-sql: true 
-        generate-ddl: true 
+          ddl-auto: update # 엔티티 변경을 데이터베이스 스키마에 자동 반영
+        show-sql: true # 콘솔에 SQL 로그를 표시
+        generate-ddl: true # DDL을 자동 생성
         properties:
           hibernate:
-            format_sql: true 
-            default_batch_fetch_size: 100 
+            format_sql: true # SQL 로그를 보기 좋게 포맷
+            default_batch_fetch_size: 100 # IN 쿼리의 최대 개수
             dialect: org.hibernate.dialect.MySQL8Dialect
 
-      
+      # MongoDB 설정
       data:
         mongodb:
           uri: mongodb://admin:kovengers1234@172.16.211.101:27017/newcord_article_db?authSource=admin
@@ -48,18 +48,20 @@ data:
         amqp-port: 5672
         username: admin
         password: admin
-    
+
     cloud:
       kakao:
         object-storage:
           endpoint: https://objectstorage.kr-central-2.kakaoi.io
           region: kr-central-2
-          bucket: user-service
+          bucket: article-service
           access-key: 9136c2a42a2f43889b8e0b1c54e2d082
           secret-key: 2a41342d7fee4f3696913079846d8729
           project-id : 3e614ed3c42f48858e6668a30d7b3c1a
 
-
+    jwt:
+      secret: 01254cd9f9f67bab5529f1d210a20d93eab0aa9d09d681e3b201b36a4069fd6b
+      
 ---
 apiVersion: apps/v1
 kind: Deployment
