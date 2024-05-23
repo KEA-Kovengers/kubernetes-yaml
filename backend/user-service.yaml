@@ -50,7 +50,7 @@ data:
         prefix: classpath:/static/
     kakao:
       api_key: a61af306bdb89fc8bbbaced44fb4fef0
-      redirect_uri: http://localhost:8080/api/auth/login
+      redirect_uri: http://localhost:3000/api/auth/login
     jwt:
       secret: 01254cd9f9f67bab5529f1d210a20d93eab0aa9d09d681e3b201b36a4069fd6b
       accessTokenValiditySeconds: 1800
