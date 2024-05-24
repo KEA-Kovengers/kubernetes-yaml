@@ -111,7 +111,7 @@ spec:
         configMap:
           name: user-service-config
       nodeSelector:
-        kakaoi.io/kke-nodepool: backend
+        kakaoi.io/kke-nodepool: backend-node
 ---
 apiVersion: v1
 kind: Service

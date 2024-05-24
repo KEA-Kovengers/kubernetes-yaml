@@ -31,7 +31,7 @@ data:
           password: kovengers1234
           driver-class-name: com.mysql.cj.jdbc.Driver
         slave:
-          jdbcUrl: jjdbc:mysql://kov-article-slave.chke6w2cu29b.ap-northeast-2.rds.amazonaws.com:3306/newcord_article_db
+          jdbcUrl: jdbc:mysql://kov-article-slave.chke6w2cu29b.ap-northeast-2.rds.amazonaws.com:3306/newcord_article_db
           username: root
           password: kovengers1234
           driver-class-name: com.mysql.cj.jdbc.Driver
@@ -71,7 +71,7 @@ data:
 
     jwt:
       secret: 01254cd9f9f67bab5529f1d210a20d93eab0aa9d09d681e3b201b36a4069fd6b
-  
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -116,7 +116,7 @@ spec:
         configMap:
           name: article-service-config
       nodeSelector:
-        kakaoi.io/kke-nodepool: backend
+        kakaoi.io/kke-nodepool: backend-node
 
 ---
 apiVersion: v1
