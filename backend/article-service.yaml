@@ -53,11 +53,20 @@ data:
           database: newcord_article_db
 
       rabbitmq:
-        host: 172.16.211.108
+        host: 61.109.236.248
         stomp-port: 61613
         amqp-port: 5672
         username: admin
         password: admin
+
+      servlet:
+        multipart:
+          max-file-size: 30MB
+          max-request-size: 30MB
+    server:
+      tomcat:
+        max-http-post-size: 31457280
+
 
     cloud:
       kakao:
@@ -71,6 +80,7 @@ data:
 
     jwt:
       secret: 01254cd9f9f67bab5529f1d210a20d93eab0aa9d09d681e3b201b36a4069fd6b
+
 
 ---
 apiVersion: apps/v1

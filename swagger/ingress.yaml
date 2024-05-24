@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: swagger-ui-ingress
+  annotations:
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: swagger.newcord.kro.kr  # 원하는 도메인으로 변경
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: swagger-ui
+            port:
+              number: 80
+  tls:
+  - hosts:
+    -     # 원하는 도메인으로 변경
+    secretName: swagger-ui-tls  # TLS 인증서 이름

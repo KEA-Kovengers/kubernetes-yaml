@@ -10,6 +10,14 @@ metadata:
       proxy_set_header Authorization $http_authorization;
     nginx.ingress.kubernetes.io/auth-url: "http://user-service-service.default.svc.cluster.local/users/auth/validate"
     nginx.ingress.kubernetes.io/auth-signin: "http://example.com/login"
+
+    ## CORS ##
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, PUT, POST, DELETE, PATCH, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "Content-Type, Authorization"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+
 spec:
   ingressClassName: nginx 
   rules:
