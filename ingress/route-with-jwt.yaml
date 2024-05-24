@@ -1,39 +1,41 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: jwt-service-ingress
-  namespace: default
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/enable-rewrite-log: "true"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_set_header Authorization $http_authorization;
-    nginx.ingress.kubernetes.io/auth-url: "http://user-service-service.default.svc.cluster.local/users/auth/validate"
-    nginx.ingress.kubernetes.io/auth-signin: "http://example.com/login"
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: jwt-service-ingress
+    namespace: default
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+      nginx.ingress.kubernetes.io/enable-rewrite-log: "true"
 
-    ## CORS ##
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
-    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, PUT, POST, DELETE, PATCH, OPTIONS"
-    nginx.ingress.kubernetes.io/cors-allow-headers: "Content-Type, Authorization"
-    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        proxy_set_header Authorization $http_authorization;
+      nginx.ingress.kubernetes.io/auth-url: "http://user-service-service.default.svc.cluster.local/users/auth/validate"
+      nginx.ingress.kubernetes.io/auth-signin: "http://example.com/login"
 
-spec:
-  ingressClassName: nginx 
-  rules:
-    - http:
-        paths:
-          - path: /articles(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: article-service-service
-                port:
-                  number: 80
-          - path: /fastapi(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: fastapi-service
-                port:
-                  number: 80
+      ## CORS ##
+      nginx.ingress.kubernetes.io/enable-cors: "true"
+      nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+      nginx.ingress.kubernetes.io/cors-allow-methods: "GET, PUT, POST, DELETE, PATCH, OPTIONS"
+      nginx.ingress.kubernetes.io/cors-allow-headers: "Content-Type, Authorization"
+      nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+
+
+  spec:
+    ingressClassName: nginx 
+    rules:
+      - http:
+          paths:
+            - path: /articles(/|$)(.*)
+              pathType: Prefix
+              backend:
+                service:
+                  name: article-service-service
+                  port:
+                    number: 80
+            - path: /fastapi(/|$)(.*)
+              pathType: Prefix
+              backend:
+                service:
+                  name: fastapi-service
+                  port:
+                    number: 80

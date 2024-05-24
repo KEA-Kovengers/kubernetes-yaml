@@ -1,22 +1,51 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: swagger-ui-ingress
+  name: swagger-service-ingress
+  namespace: default
   annotations:
+    ## CORS ##
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, PUT, POST, DELETE, PATCH, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "Content-Type, Authorization"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+
+    # High Priority for swagger-ui
+    nginx.ingress.kubernetes.io/server-snippet: |
+      set $ingress_name "high-priority";
+
+
 spec:
-  ingressClassName: nginx
+  ingressClassName: nginx 
   rules:
-  - host: swagger.newcord.kro.kr  # 원하는 도메인으로 변경
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: swagger-ui
-            port:
-              number: 80
-  tls:
-  - hosts:
-    -     # 원하는 도메인으로 변경
-    secretName: swagger-ui-tls  # TLS 인증서 이름
+    - http:
+        paths:
+          - path: /articles/v3/api-docs/swagger-config
+            pathType: Exact
+            backend:
+              service:
+                name: article-service-service
+                port:
+                  number: 80
+          - path: /articles/v3/api-docs
+            pathType: Exact
+            backend:
+              service:
+                name: article-service-service
+                port:
+                  number: 80
+          - path: /articles/swagger-ui/index.html
+            pathType: Exact
+            backend:
+              service:
+                name: article-service-service
+                port:
+                  number: 80
+          - path: /articles/swagger-ui(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: article-service-service
+                port:
+                  number: 80
