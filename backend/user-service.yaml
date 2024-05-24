@@ -20,17 +20,17 @@ data:
       autoconfigure:
         exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
       datasource:
-        url: jdbc:mysql://172.16.211.102:3306/newcord_user_db
-        username: root
-        password: kovengers1234
-        driver-class-name: com.mysql.cj.jdbc.Driver
+        # url: jdbc:mysql://172.16.211.102:3306/newcord_user_db
+        # username: root
+        # password: kovengers1234
+        # driver-class-name: com.mysql.cj.jdbc.Driver
         master:
-          jdbcUrl: jdbc:mysql://172.16.211.102:3306/newcord_user_db
+          jdbcUrl: jdbc:mysql://kov-user-mysql.chke6w2cu29b.ap-northeast-2.rds.amazonaws.com:3306/newcord_user_db
           username: root
           password: kovengers1234
           driver-class-name: com.mysql.cj.jdbc.Driver
         slave:
-          jdbcUrl: jdbc:mysql://172.16.211.107:3307/newcord_user_db
+          jdbcUrl: jdbc:mysql://kov-user-slave.chke6w2cu29b.ap-northeast-2.rds.amazonaws.com:3306/newcord_user_db
           username: root
           password: kovengers1234
           driver-class-name: com.mysql.cj.jdbc.Driver
@@ -65,7 +65,7 @@ data:
           access-key: 9136c2a42a2f43889b8e0b1c54e2d082
           secret-key: 2a41342d7fee4f3696913079846d8729
           project-id : 3e614ed3c42f48858e6668a30d7b3c1a
-  
+
 
 ---
 apiVersion: apps/v1
@@ -110,7 +110,8 @@ spec:
       - name: config
         configMap:
           name: user-service-config
-
+      nodeSelector:
+        kakaoi.io/kke-nodepool: backend
 ---
 apiVersion: v1
 kind: Service
@@ -123,4 +124,4 @@ spec:
     - protocol: TCP
       port: 80            
       targetPort: 8080    
-  type: LoadBalancer
+  type: ClusterIP

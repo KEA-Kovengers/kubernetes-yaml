@@ -21,10 +21,20 @@ data:
         allow-bean-definition-overriding: true
       datasource:
         # JPA 데이터 소스 설정
-        url: jdbc:mysql://172.16.211.101:3306/newcord_article_db
-        username: root
-        password: kovengers1234
-        driver-class-name: com.mysql.cj.jdbc.Driver
+        # url: jdbc:mysql://172.16.211.101:3306/newcord_article_db
+        # username: root
+        # password: kovengers1234
+        # driver-class-name: com.mysql.cj.jdbc.Driver
+        master:
+          jdbcUrl: jdbc:mysql://kov-article-mysql.chke6w2cu29b.ap-northeast-2.rds.amazonaws.com:3306/newcord_article_db
+          username: root
+          password: kovengers1234
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        slave:
+          jdbcUrl: jjdbc:mysql://kov-article-slave.chke6w2cu29b.ap-northeast-2.rds.amazonaws.com:3306/newcord_article_db
+          username: root
+          password: kovengers1234
+          driver-class-name: com.mysql.cj.jdbc.Driver
       jpa:
         hibernate:
           ddl-auto: update # 엔티티 변경을 데이터베이스 스키마에 자동 반영
@@ -39,7 +49,7 @@ data:
       # MongoDB 설정
       data:
         mongodb:
-          uri: mongodb://admin:kovengers1234@172.16.211.101:27017/newcord_article_db?authSource=admin
+          uri: mongodb://admin:kovengers1234@43.200.244.9:27017/newcord_article_db?authSource=admin
           database: newcord_article_db
 
       rabbitmq:
@@ -61,7 +71,7 @@ data:
 
     jwt:
       secret: 01254cd9f9f67bab5529f1d210a20d93eab0aa9d09d681e3b201b36a4069fd6b
-      
+  
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -105,6 +115,8 @@ spec:
       - name: config
         configMap:
           name: article-service-config
+      nodeSelector:
+        kakaoi.io/kke-nodepool: backend
 
 ---
 apiVersion: v1
@@ -118,4 +130,4 @@ spec:
     - protocol: TCP
       port: 80            
       targetPort: 8080    
-  type: LoadBalancer
+  type: ClusterIP
