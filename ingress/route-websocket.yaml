@@ -1,10 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: no-jwt-service-ingress
+  name: websocket-service-ingress
   namespace: default
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/enable-rewrite-log: "true"
 
         ## CORS ##
@@ -14,16 +13,23 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-headers: "Content-Type, Authorization"
     nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
 
+    ## WebSocket ##
+    nginx.org/websocket-services: "article-service-service"
+    nginx.ingress.kubernetes.io/proxy-body-size: 64m
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '3600'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '3600'
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '3600'
+
 spec:
   ingressClassName: nginx 
   rules:
     - http:
         paths:
-          - path: /users(/|$)(.*)
-            pathType: Prefix
+          - path: /ws
+            pathType: Exact
             backend:
               service:
-                name: user-service-service
+                name: article-service-service
                 port:
                   number: 80
   
