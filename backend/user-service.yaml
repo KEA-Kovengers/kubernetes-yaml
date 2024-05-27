@@ -29,11 +29,21 @@ data:
           username: root
           password: kovengers1234
           driver-class-name: com.mysql.cj.jdbc.Driver
+          maximum-pool-size: 10
+          minimum-idle: 4
+          idle-timeout: 600000
+          max-lifetime: 1800000
+          connection-timeout: 30000
         slave:
           jdbcUrl: jdbc:mysql://kov-user-slave.chke6w2cu29b.ap-northeast-2.rds.amazonaws.com:3306/newcord_user_db
           username: root
           password: kovengers1234
           driver-class-name: com.mysql.cj.jdbc.Driver
+          maximum-pool-size: 10
+          minimum-idle: 4
+          idle-timeout: 600000
+          max-lifetime: 1800000
+          connection-timeout: 30000
         #    url: jdbc:mysql://localhost:3306/newcord_userservice_db
         #    username: kovengers
         #    password: kovengers1234
@@ -73,6 +83,7 @@ data:
           secret-key: 2a41342d7fee4f3696913079846d8729
           project-id : 3e614ed3c42f48858e6668a30d7b3c1a
 
+
     springdoc:
       api-docs:
         enabled: true
@@ -83,6 +94,8 @@ data:
         url: '/users/v3/api-docs'
         doc-expansion: none
         disable-swagger-default-url: true
+
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -128,6 +141,7 @@ spec:
           name: user-service-config
       nodeSelector:
         kakaoi.io/kke-nodepool: backend-node
+
 ---
 apiVersion: v1
 kind: Service
