@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kibana-config
+  namespace: default
+data:
+  kibana.yml: |
+    xpack.security.encryptionKey: "ZA0aPcn0kjx9qxuq7N7fdlJ2IlOAwr2I"
+    xpack.encryptedSavedObjects.encryptionKey: "ZA0aPcn0kjx9qxuq7N7fdlJ2IlOAwr2I"
+    xpack.reporting.encryptionKey: "ZA0aPcn0kjx9qxuq7N7fdlJ2IlOAwr2I"
+    server.host: "0.0.0.0"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kibana
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kibana
+  template:
+    metadata:
+      labels:
+        app: kibana
+    spec:
+      containers:
+      - name: kibana
+        image: docker.elastic.co/kibana/kibana:8.13.4
+        volumeMounts:
+        - name: kibana-config
+          mountPath: /usr/share/kibana/config/kibana.yml
+          subPath: kibana.yml
+        resources:
+          limits:
+            cpu: 1000m
+          requests:
+            cpu: 100m
+        env:
+          - name: ELASTICSEARCH_URL
+            value: http://elasticsearch:9200
+        ports:
+        - containerPort: 5601
+        
+      volumes:
+      - name: kibana-config
+        configMap:
+          name: kibana-config
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana
+  namespace: default
+spec:
+  ports:
+  - port: 5601
+  selector:
+    app: kibana
