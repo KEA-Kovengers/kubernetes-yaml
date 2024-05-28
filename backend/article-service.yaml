@@ -9,6 +9,7 @@ data:
   rabbitmq-username: YWRtaW4=  # admin
   rabbitmq-password: YWRtaW4=  # admin
 
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
