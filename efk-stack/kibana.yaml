@@ -5,10 +5,14 @@ metadata:
   namespace: default
 data:
   kibana.yml: |
+    elasticsearch.hosts: ["http://elasticsearch.default.svc.cluster.local:9200"]
     xpack.security.encryptionKey: "ZA0aPcn0kjx9qxuq7N7fdlJ2IlOAwr2I"
     xpack.encryptedSavedObjects.encryptionKey: "ZA0aPcn0kjx9qxuq7N7fdlJ2IlOAwr2I"
     xpack.reporting.encryptionKey: "ZA0aPcn0kjx9qxuq7N7fdlJ2IlOAwr2I"
+    xpack.reporting.roles.enabled: false
+
     server.host: "0.0.0.0"
+
 ---
 apiVersion: apps/v1
 kind: Deployment
