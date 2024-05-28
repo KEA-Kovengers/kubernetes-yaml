@@ -49,3 +49,10 @@ spec:
                 name: article-service-service
                 port:
                   number: 80
+          - path: /fastapi/api(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: fastapi-service
+                port:
+                  number: 80

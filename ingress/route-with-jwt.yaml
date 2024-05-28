@@ -19,19 +19,11 @@
       nginx.ingress.kubernetes.io/cors-allow-headers: "Content-Type, Authorization"
       nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
 
-
   spec:
     ingressClassName: nginx 
     rules:
       - http:
           paths:
-            - path: /articles(/|$)(.*)
-              pathType: Prefix
-              backend:
-                service:
-                  name: article-service-service
-                  port:
-                    number: 80
             - path: /fastapi(/|$)(.*)
               pathType: Prefix
               backend:

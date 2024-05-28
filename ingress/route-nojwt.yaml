@@ -26,4 +26,10 @@ spec:
                 name: user-service-service
                 port:
                   number: 80
-  
+          - path: /articles(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: article-service-service
+                port:
+                  number: 80
