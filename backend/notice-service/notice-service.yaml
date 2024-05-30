@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: notice-service-secrets
+type: Opaque
+data:
+  username: cm9vdA==  # root
+  password: a292ZW5nZXJzMTIzNA==  # kovengers1234
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notice-service
+  labels:
+    app: notice-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: notice-service
+  template:
+    metadata:
+      labels:
+        app: notice-service
+    spec:
+      containers:
+      - name: notice-service
+        image: kovengers/notice-service:latest
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+        env:
+          - name: SPRING_DATASOURCE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: notice-service-secrets
+                key: username
+          - name: SPRING_DATASOURCE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: notice-service-secrets
+                key: password
+          - name: SPRING_CONFIG_LOCATION
+            value: /config/application.yml
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        configMap:
+          name: notice-service-config
+      nodeSelector:
+        kakaoi.io/kke-nodepool: backend-node
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notice-service-service
+spec:
+  selector:
+    app: notice-service
+  ports:
+    - protocol: TCP
+      port: 80            
+      targetPort: 8080
+  type: ClusterIP
