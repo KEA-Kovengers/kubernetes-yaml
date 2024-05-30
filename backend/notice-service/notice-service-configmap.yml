@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  application.yml: |-
+    server:
+      port: 8081
+    spring:
+      application:
+        name: notice-service
+      data:
+        mongodb:
+          uri: mongodb://admin:kovengers1234@43.200.244.9:27017/newcord_article_db?authSource=admin
+          database: newcord_article_db
+
+    jwt:
+      secret: 01254cd9f9f67bab5529f1d210a20d93eab0aa9d09d681e3b201b36a4069fd6b
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: notice-service-config
