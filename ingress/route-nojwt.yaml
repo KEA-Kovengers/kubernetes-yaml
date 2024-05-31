@@ -33,3 +33,10 @@ spec:
                 name: article-service-service
                 port:
                   number: 80
+          - path: /notices(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: notice-service-service
+                port:
+                  number: 80

@@ -20,6 +20,20 @@ data:
 
     jwt:
       secret: 01254cd9f9f67bab5529f1d210a20d93eab0aa9d09d681e3b201b36a4069fd6b
+
+
+    springdoc:
+      api-docs:
+        enabled: true
+        path: '/notices/v3/api-docs'
+      swagger-ui:
+        path: '/notices/swagger-ui'
+        config-url: '/notices/v3/api-docs/swagger-config'
+        url: '/notices/v3/api-docs'
+        doc-expansion: none
+        disable-swagger-default-url: true
+
+        
 kind: ConfigMap
 metadata:
   creationTimestamp: null
