@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: user-service
-        image: kovengers/user-service:39
+        image: kovengers/user-service:40
         ports:
         - containerPort: 8081
         imagePullPolicy: Always
