@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: article-service
-        image: kovengers/article-service:37
+        image: kovengers/article-service:39
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
