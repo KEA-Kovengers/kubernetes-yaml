@@ -8,8 +8,8 @@ data:
         name: notice-service
       data:
         mongodb:
-          uri: mongodb://admin:kovengers1234@43.200.244.9:27017/newcord_article_db?authSource=admin
-          database: newcord_article_db
+          uri: mongodb://admin:kovengers1234@43.200.244.9:27017/newcord_notice_db?authSource=admin
+          database: newcord_notice_db
       rabbitmq:
         host: 61.109.236.248
         stomp-port: 61613
