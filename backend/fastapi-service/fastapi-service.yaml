@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: fastapi-service
   labels:
+    app.kubernetes.io/name: fastapi-service
     app: fastapi-service
 spec:
   replicas: 2

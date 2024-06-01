@@ -13,6 +13,7 @@ kind: Deployment
 metadata:
   name: notice-service
   labels:
+    app.kubernetes.io/name: notice-service
     app: notice-service
 spec:
   replicas: 2
