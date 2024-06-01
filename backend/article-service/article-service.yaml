@@ -25,6 +25,7 @@ spec:
   template:
     metadata:
       labels:
+        app.kubernetes.io/name: article-service
         app: article-service
     spec:
       containers:

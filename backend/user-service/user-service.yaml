@@ -23,6 +23,7 @@ spec:
   template:
     metadata:
       labels:
+        app.kubernetes.io/name: user-service
         app: user-service
     spec:
       containers:

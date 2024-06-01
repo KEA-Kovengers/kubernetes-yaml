@@ -23,6 +23,7 @@ spec:
   template:
     metadata:
       labels:
+        app.kubernetes.io/name: notice-service
         app: notice-service
     spec:
       containers:
