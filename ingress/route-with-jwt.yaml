@@ -9,8 +9,8 @@
 
       nginx.ingress.kubernetes.io/configuration-snippet: |
         proxy_set_header Authorization $http_authorization;
-      nginx.ingress.kubernetes.io/auth-url: "http://user-service-service.default.svc.cluster.local/users/auth/validate"
-      nginx.ingress.kubernetes.io/auth-signin: "http://example.com/login"
+      # nginx.ingress.kubernetes.io/auth-url: "http://user-service-service.default.svc.cluster.local/users/auth/validate"
+      # nginx.ingress.kubernetes.io/auth-signin: "http://example.com/login"
 
       ## CORS ##
       nginx.ingress.kubernetes.io/enable-cors: "true"
