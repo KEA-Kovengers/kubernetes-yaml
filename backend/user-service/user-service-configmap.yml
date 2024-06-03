@@ -85,6 +85,8 @@ data:
         url: '/users/v3/api-docs'
         doc-expansion: none
         disable-swagger-default-url: true
+
+        
 kind: ConfigMap
 metadata:
   creationTimestamp: null
