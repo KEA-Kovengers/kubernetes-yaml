@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: notice-service
-        image: kovengers/notice-service:64
+        image: kovengers/notice-service:65
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
