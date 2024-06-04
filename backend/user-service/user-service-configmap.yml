@@ -15,7 +15,7 @@ data:
         # username: root
         # password: kovengers1234
         # driver-class-name: com.mysql.cj.jdbc.Driver
-            master:
+        master:
           jdbcUrl: jdbc:mysql://43.203.255.68:3306/newcord_user_db
           username: root
           password: kovengers1234
