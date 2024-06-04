@@ -17,6 +17,13 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
 
 
+    ## WebSocket ##
+    nginx.org/websocket-services: "article-service-service,notice-service-service"
+    nginx.ingress.kubernetes.io/proxy-body-size: 64m
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '3600'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '3600'
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '3600'
+
 spec:
   ingressClassName: nginx 
   rules:
