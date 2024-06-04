@@ -12,7 +12,7 @@ data:
         # driver-class-name: com.mysql.cj.jdbc.Driver
         master:
           jdbcUrl: jdbc:mysql://kov-article-mysql.chke6w2cu29b.ap-northeast-2.rds.amazonaws.com:3306/newcord_article_db
-          username: kovengers
+          username: root
           password: kovengers1234
           driver-class-name: com.mysql.cj.jdbc.Driver
           maximum-pool-size: 10
@@ -22,7 +22,7 @@ data:
           connection-timeout: 30000
         slave:
           jdbcUrl: jdbc:mysql://kov-article-slave.chke6w2cu29b.ap-northeast-2.rds.amazonaws.com:3306/newcord_article_db
-          username: kovengers
+          username: root
           password: kovengers1234
           driver-class-name: com.mysql.cj.jdbc.Driver
           maximum-pool-size: 10
