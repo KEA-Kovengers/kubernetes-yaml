@@ -11,7 +11,7 @@ data:
         # password: kovengers1234
         # driver-class-name: com.mysql.cj.jdbc.Driver
         master:
-          jdbcUrl: jdbc:mysql://54.180.126.54:3306/newcord_article_db
+          jdbcUrl: jdbc:mysql://kov-article-mysql.chke6w2cu29b.ap-northeast-2.rds.amazonaws.com:3306/newcord_article_db
           username: kovengers
           password: kovengers1234
           driver-class-name: com.mysql.cj.jdbc.Driver
@@ -21,7 +21,7 @@ data:
           max-lifetime: 1800000
           connection-timeout: 30000
         slave:
-          jdbcUrl: jdbc:mysql://54.180.126.54:3307/slave_article_db
+          jdbcUrl: jdbc:mysql://kov-article-slave.chke6w2cu29b.ap-northeast-2.rds.amazonaws.com:3306/newcord_article_db
           username: kovengers
           password: kovengers1234
           driver-class-name: com.mysql.cj.jdbc.Driver
