@@ -30,11 +30,8 @@ spec:
             name: fastapi-service-secrets
         resources:
           requests:
-            cpu: "10m"
-            memory: "100Mi"
-          limits:
-            cpu: "100m"
-            memory: "200Mi"
+            cpu: "500m"
+            memory: "400Mi"
       nodeSelector:
         kakaoi.io/kke-nodepool: backend-node
 

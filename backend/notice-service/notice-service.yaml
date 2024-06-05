@@ -47,11 +47,8 @@ spec:
             value: /config/application.yml
         resources:
           requests:
-            cpu: "10m"
+            cpu: "500m"
             memory: "400Mi"
-          limits:
-            cpu: "100m"
-            memory: "500Mi"
         volumeMounts:
         - name: config
           mountPath: /config
