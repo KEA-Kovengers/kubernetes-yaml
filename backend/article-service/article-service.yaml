@@ -49,10 +49,10 @@ spec:
             value: /config/application.yml
         resources:
           requests:
-            cpu: "100m"
+            cpu: "500m"
             memory: "400Mi"
           limits:
-            cpu: "1000m"
+            cpu: "2000m"
             memory: "500Mi"
         volumeMounts:
         - name: config
