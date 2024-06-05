@@ -45,6 +45,14 @@ spec:
                 key: password
           - name: SPRING_CONFIG_LOCATION
             value: /config/application.yml
+        resources:
+          requests:
+            cpu: "20m"
+            memory: "400Mi"
+          limits:
+            cpu: "200m"
+            memory: "450Mi"
+
         volumeMounts:
         - name: config
           mountPath: /config
