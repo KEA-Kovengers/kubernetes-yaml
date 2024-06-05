@@ -1,8 +1,8 @@
 apiVersion: v1
 data:
   application.yml: "server:\n  port: 8081\nspring:\n  application:\n    name: notice-service\n
-    \ data:\n    mongodb:\n      uri: mongodb://admin:kovengers1234@43.200.244.9:27017/newcord_article_db?authSource=admin\n
-    \     database: newcord_article_db\n  rabbitmq:\n    host: 61.109.236.248\n    stomp-port:
+    \ data:\n    mongodb:\n      uri: mongodb://admin:kovengers1234@43.200.244.9:27017/newcord_notice_db?authSource=admin\n
+    \     database: newcord_notice_db\n  rabbitmq:\n    host: 61.109.236.248\n    stomp-port:
     61613\n    amqp-port: 5672\n    username: admin\n    password: admin\n    virtual-host:
     /\n    \njwt:\n  secret: 01254cd9f9f67bab5529f1d210a20d93eab0aa9d09d681e3b201b36a4069fd6b\n\nspringdoc:\n
     \ api-docs:\n    enabled: true\n    path: '/v3/api-docs'\n  swagger-ui:\n    path:
