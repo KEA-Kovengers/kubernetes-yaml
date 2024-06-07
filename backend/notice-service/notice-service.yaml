@@ -47,7 +47,7 @@ spec:
             value: /config/application.yml
         resources:
           requests:
-            cpu: "500m"
+            cpu: "200m"
             memory: "400Mi"
         volumeMounts:
         - name: config
