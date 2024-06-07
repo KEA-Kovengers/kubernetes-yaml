@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fastapi-service-config
+data:
+  PORT: "8000"
+  KAKAO_RESTAPI_KEY: "fad7af8de17162f6755c48d8d3080066"
+  MONGO_URL: "mongodb+srv://keakovengers:a5BDYok5uL0PrFNe@cluster0.m619abc.mongodb.net/"
+  CLUSTER_NAME: "KEA"
+  PROJECT_ID: "poetic-primer-419101"
+  LOCATION: "us-central1"
+  VERSION: "gemini-1.0-pro"
+  SECRET_KEY: "jwtsecretkey"
+  openai_api_key: "bb8645db9639439fa9ccf54c485e68da"
+  openai_azure_endpoint: "https://kea-kovengers-gpt.openai.azure.com/"
