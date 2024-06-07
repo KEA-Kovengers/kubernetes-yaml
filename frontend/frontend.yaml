@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: kovengers/frontend:37
+        image: kovengers/frontend:38
         ports:
         - containerPort: 80
         imagePullPolicy: Always
