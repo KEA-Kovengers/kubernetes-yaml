@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: fastapi-container
-        image: kovengers/fast-api:5
+        image: kovengers/fast-api:6
         ports:
         - containerPort: 8000
         imagePullPolicy: Always
